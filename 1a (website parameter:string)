@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script type="text/javascript">
+			function s_vowel()
+			{
+				var str=prompt("Enter a string:\n","");
+				for(var i=0;i<str.length;i++)
+				{
+					if(str.charAt(i)=='a' || str.charAt(i)=='e' || str.charAt(i)=='i' || str.charAt(i)=='o' || str.charAt(i)=='u' || str.charAt(i)=='A' || str.charAt(i)=='E' || str.charAt(i)=='I' || str.charAt(i)=='O' || str.charAt(i)=='U')
+					{
+						document.write("Entered String : "+str+"<br/>");	
+						document.write("Left most vowel : "+str.charAt(i)+"<br/>");
+						document.write("The position of the first vowel  : "+(i+1));
+						exit;
+					}
+				}
+				document.write("Entered String : "+str+"<br/>");
+				document.write("The entered string has no vowel");
+			}
+		</script>
+	</head>
+	<body onload="s_vowel()">
+	</body>
+</html>
