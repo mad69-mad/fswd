@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<body>
+	<div id='h'></div>
+		<script>
+			var v=5,f=1,t="Text-Growing",color;
+			function c()
+			{
+				if (f==1)
+				{
+					color="red";
+					v+=5;						
+				}
+				else
+				{
+					color="blue";
+					v-=5;	
+				}
+				document.getElementById('h').innerHTML='<h1 style="font-size:'+v+'px;color:'+color+';margin:0px;"><b>'+t+'</b></h1>';
+				if(v==50)
+				{
+					f=0;
+					t="Text-Shrinking"
+				}
+				if(v==5)
+				{
+					f=1;
+					t="Text-Growing"; 
+				}
+				a();
+			}
+			function a()
+			{
+				setTimeout(c,100);
+			}
+			a();
+		</script>
+	</body>
+</html>
