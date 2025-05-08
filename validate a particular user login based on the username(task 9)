@@ -1,0 +1,46 @@
+login.jsp:
+<%@page contentType="text/html"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LOGIN PAGE</title>
+</head>
+<body>
+    <form action="forward.jsp" method="post">
+        <h1>Enter your Credentials!</h1>
+        <h3>Username: <input type="text" name="uname"/></h3>
+        <h3>Password: <input type="password" name="pwd"/></h3>
+        <input type="submit" value="SUBMIT">
+        <input type="reset"/>
+    </form>
+</body>
+</html>
+
+forward.jsp:
+<%@page contentType="text/html"%>
+<%
+    String username = request.getParameter("uname");
+    String password = request.getParameter("pwd");
+    if(username.equals("CSE") && password.equals("griet")) {
+%>
+        <jsp:forward page="welcomePage.jsp"/>
+<%
+    } else {
+%>
+        <h3 style="color:red;">Invalid Username or Password</h3>
+        <jsp:include page="login.jsp"/>
+<%
+    }
+%>
+
+welcomePage.jsp:
+<%@page contentType="text/html"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome Page</title>
+</head>
+<body>
+    <h1>Welcome, <%= request.getParameter("uname") %>!</h1>
+</body>
+</html>
