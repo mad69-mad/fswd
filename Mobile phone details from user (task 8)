@@ -1,0 +1,128 @@
+Database mobile:
+CREATE TABLE MobileDetails (
+    ModelId VARCHAR(20) PRIMARY KEY,
+    Price INT,
+    Company VARCHAR(50),
+    Color VARCHAR(30)
+);
+
+
+index.html:
+<!doctype html>
+<body>
+<form action="/mobile-1.0-SNAPSHOT/MobileDetails" method="post">
+<fieldset style="width:25%; background-color:blue">
+<h2 align="center">Mobile Details form</h2><hr>
+<table>
+<tr><td>Model Number</td>
+<td><input type="text" name="ModelId" required /></td></tr>
+<tr><td>Mobile Price</td>
+<td><input type="text" name="Price" required /></td></tr>
+<tr><td>Mobile Company</td>
+<td><input type="text" name="Company" required /></td></tr>
+<tr><td>Mobile Color</td>
+<td><input type="text" name="Color" required/></td></tr>
+<tr><td><input type="reset" value="Reset"/></td>
+<td><input type="submit" value="Register"/></td></tr>
+</table>
+</fieldset>
+</form>
+</body>
+</html>
+
+web.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <servlet>
+        <servlet-name>MobileDetails</servlet-name>
+        <servlet-class>com.mycompany.mobile.MobileDetails</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MobileDetails</servlet-name>
+        <url-pattern>/MobileDetails</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
+
+
+MobileDetails.java:
+package com.mycompany.mobile;
+import java.io.*;
+import java.sql.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+public class MobileDetails extends HttpServlet
+{
+public void doPost(HttpServletRequest request, HttpServletResponse response) throws
+ServletException, IOException
+{
+response.setContentType("text/html");
+PrintWriter out = response.getWriter();
+System.out.println(request.getParameter("ModelId"));
+String model = request.getParameter("ModelId");
+int price = Integer.parseInt(request.getParameter("Price"));
+String company = request.getParameter("Company");
+String color = request.getParameter("Color");
+try
+{
+//load the driver
+Class.forName("com.mysql.jdbc.Driver");  
+//create connection object
+Connection con=DriverManager.getConnection(
+"jdbc:mysql://localhost:3306/mobile","root","");  
+//create the prepared statement object
+PreparedStatement ps=con.prepareStatement("insert into MobileDetails values(?,?,?,?)");
+ps.setString(1,model);
+ps.setInt(2,price);
+ps.setString(3,company);
+ps.setString(4, color);
+int i = ps.executeUpdate();
+if(i>0)
+out.print("<font color='green' size='4'>Record inserted successfully...</font>");
+//create the statement object
+Statement stmt = con.createStatement();
+String sql;
+sql = "SELECT * FROM MobileDetails";
+ResultSet rs = stmt.executeQuery(sql);
+out.println("<table border=1 >");
+out.println("<caption><h2>Mobile Details</h2></caption>");
+out.println("<tr style='background-color:#ffffb3; color:red'>");
+out.println("<th>Model Id</th>");
+out.println("<th>Price(Rs.)</th>");
+out.println("<th>Company</th>");
+out.println("<th>Color</th>");
+out.println("</tr>");
+// Extract data from result set
+while(rs.next())
+{
+//Retrieve by column name
+String mModel = rs.getString("ModelId");
+int mPrice = rs.getInt("Price");
+String mCompany = rs.getString("Company");
+String mColor = rs.getString("Color");
+//Display values
+out.println("<tr style='background-color:#b3ffd9;'>");
+out.println("<td>" + mModel + "</td>");
+out.println("<td>" + mPrice + "</td>");
+out.println("<td>" + mCompany + "</td>");
+out.println("<td>" + mColor + "</td>");
+out.println("</tr>");
+}
+out.println("</table>");
+out.println("<a href='register.html'>Home</a>");
+// Clean-up environment
+rs.close();
+stmt.close();
+con.close();
+}
+catch (Exception ex)
+{
+ex.printStackTrace();
+}
+out.close();
+}
+}
