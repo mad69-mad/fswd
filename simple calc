@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript Calculator</title>
+		<style>
+			h1{
+				text-align:center;
+				background-color:lightblue;
+				color:white;
+			}
+			form{
+				border:3px;
+				border-radius:5px;
+				border-style:solid;
+				width:300px;
+				text-align:center;
+				margin:auto;
+			}
+			#clear{
+				background-color:red;
+				width:200px;
+			}
+			#calc{
+				width:250px;	
+			}
+			input{
+				background-color:green;
+				color:white;
+				margin:5px;
+				height:40px;
+				width:50px;
+			}
+		</style>
+	</head>
+	<body style="text-align:center; ">
+		<h1>Calculator in Javascript</h1>
+		<form name='f1' border='1'>
+			<input id='calc' type='text' name='answer'><br/>
+			<input type='button' value="1" onclick="f1.answer.value+='1'">
+			<input type='button' value="2" onclick="f1.answer.value+='2'">
+			<input type='button' value="3" onclick="f1.answer.value+='3'">
+			<input type='button' value="/" onclick="f1.answer.value+='/'">
+			<br/>
+			<input type='button' value="4" onclick="f1.answer.value+='4'">
+			<input type='button' value="5" onclick="f1.answer.value+='5'">
+			<input type='button' value="6" onclick="f1.answer.value+='6'">
+			<input type='button' value="" onclick="f1.answer.value+=''">
+			<br/>
+			<input type='button' value="7" onclick="f1.answer.value+='7'">
+			<input type='button' value="8" onclick="f1.answer.value+='8'">
+			<input type='button' value="9" onclick="f1.answer.value+='9'">
+			<input type='button' value="-" onclick="f1.answer.value+='-'">
+			<br/>
+			<input type='button' value="+" onclick="f1.answer.value+='+'">
+			<input type='button' value="0" onclick="f1.answer.value+='0'">
+			<input type='button' value="%" onclick="f1.answer.value+='%'">
+			<input type='button' value="=" onclick="f1.answer.value=eval(f1.answer.value)">
+			<br/>
+			<input id="clear" type='button' value='Clear' onclick="f1.answer.value=''">
+		</form>
+	</body>
+</html>
