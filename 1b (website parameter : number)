@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script type="text/javascript">
+			function reverse()
+			{
+				var n=parseInt(prompt("Enter a number:\n",""));
+				var r,rev=0;
+				while(n!=0)
+				{
+					r=n%10;
+					rev=rev*10+r;
+					n=parseInt(n/10);
+				}
+				document.write("Reverse: "+rev);
+			}
+		</script>
+	</head>
+	<body onload="reverse()">
+	</body>
+</html>
