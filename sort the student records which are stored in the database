@@ -1,3 +1,18 @@
+CREATE TABLE studentinfo (
+    usn VARCHAR(20) PRIMARY KEY,
+    name VARCHAR(50),
+    address VARCHAR(100)
+);
+
+
+INSERT INTO studentinfo (usn, name, address) VALUES
+('4MH21CS001', 'Alice', 'New York'),
+('4MH21CS005', 'Charlie', 'Texas'),
+('4MH21CS003', 'Bob', 'California'),
+('4MH21CS002', 'David', 'Nevada');
+
+
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -69,3 +84,7 @@
 	?>
 	</body>
 </html>
+
+
+
+http://localhost/c8/studentsort.php
